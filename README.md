@@ -1,5 +1,5 @@
 # QuakeAlarm
-Dispositivo Internet de las Cosas para detectar sismos basado en Arduino y utilizando distintos tipos de sensores y tarjetas de conexion.
+Dispositivo Internet de las Cosas para detectar sismos basado en Arduino utilizando distintos tipos de sensores y distintas tarjetas de conexion.
 
 Algunas versiones del dispositivo estan basadas en el sensor de pendulo invertido QuakeAlarm y otras basadas en acelerometros.
 
