@@ -5,4 +5,4 @@ Algunas versiones del dispositivo estan basadas en el sensor de pendulo invertid
 
 Tambien cada version posee distintas formas de conexion a internet, algunas utilizan la Shield Ethernet y otras el modulo Ethernet para Arduino.
 
-En el caso del módulo Ethernet (chip NC28j60) se mantiene elmismo código pero se utiliza la librería UIPEthernet (https://github.com/ntruchsess/arduino_uip -- No funciona en Arduino 1.6.7+. Probar con esta: http://www.zalaszam.hu/~cassy/devel/avr/UIPEthernet.zip)
+En el caso del módulo Ethernet (chip ENC28j60) se mantiene el mismo código pero se utiliza la librería UIPEthernet (https://github.com/ntruchsess/arduino_uip -- No funciona en Arduino 1.6.7+. Probar con esta: http://www.zalaszam.hu/~cassy/devel/avr/UIPEthernet.zip)
