@@ -57,7 +57,9 @@ void httpRequest(char accion[200]) {
       // Envia ping al servidor via GET
       client.print("GET /sensor.php?id=");
       client.print(id);
-      client.println("&sensor=quakealarm&valor=ping HTTP/1.1");
+      client.print("&sensor=quakealarm&v=");
+      client.print(qaValor);
+      client.println("&valor=ping HTTP/1.1");
       client.print("Host: ");
       client.println(server);
       client.println("User-Agent: Arduino-Ethernet");
