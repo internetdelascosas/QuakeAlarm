@@ -47,7 +47,7 @@ long ultimaConexion = 0; // Tiempo en milisegundos desde la ultima conexion al s
 int ultimoEstado = 0; // Estado de la ultima conexion
 long ultimoPing = 0; // Tiempo desde que se envio el ultimo ping al servidor
 
-// Fumcion que realiza conexion http al servidor
+// Funcion que realiza conexion http al servidor
 void httpRequest(char accion[200]) {
   // Se conecta al servidor en el puerto 80 (web)
   Serial.println("Iniciando conexion...");
@@ -90,7 +90,7 @@ void httpRequest(char accion[200]) {
        // Actualiza el tiempo en milisegundos de la ultima conexion
        ultimaConexion = millis();
     }
-  } 
+  }
   else {
     // Si la conexion fallo se desconecta
     Serial.println("Error al conectarse al servidor");
@@ -101,7 +101,7 @@ void httpRequest(char accion[200]) {
 }
 
 // Setup de Arduino
-void setup () {   
+void setup () {
   // Inicializa puerto serial
   Serial.begin(9600);
   Serial.println("##### Internetdelascosas.cl #####");
@@ -117,18 +117,18 @@ void setup () {
   Serial.println(Ethernet.localIP());
 
   // Configura PIN para el QuakeAlarm
-  pinMode(QUAKEALARM, INPUT); 
-} 
+  pinMode(QUAKEALARM, INPUT);
+}
 
 // Loop principal
 void loop () {
   // Obtiene el valor del QuakeAlarm
-  qaValor = analogRead(QUAKEALARM);   
-  // Obtiene la diferencia con el valor anterior  
-  diferencia = qaValorPrevio - qaValor;   
-  
+  qaValor = analogRead(QUAKEALARM);
+  // Obtiene la diferencia con el valor anterior
+  diferencia = qaValorPrevio - qaValor;
+
   // Si hay datos que llegan por la conexion los envia a la puerta serial
-  if (client.available()) { 
+  if (client.available()) {
     // Parsea datos recibidos desde elservidor (sensibilidad, ping)
     if(client.find("<sensibilidad>")) {
       Serial.println("Configuracion recibida:");
@@ -155,14 +155,14 @@ void loop () {
     Serial.println();
     client.stop();
   }
- 
-  // Si no esta conectado y han pasado X segundos (intervaloConexion) 
+
+  // Si no esta conectado y han pasado X segundos (intervaloConexion)
   // despues de la ultima conexion envia datos al servidor
   if(!client.connected() && ((diferencia > 0) and (diferencia >= sensibilidad) and ((millis() - ultimaConexion) > intervaloTiempo))) {
     httpRequest("activacion");
   }
   qaValorPrevio = qaValor;
-  
+
   // Envia Ping al servidor - Estacion conectada
   if ((millis() - ultimoPing) > ping) {
     Ethernet.begin(mac);
@@ -170,9 +170,9 @@ void loop () {
     Serial.println("Ping - Estacion conectada");
     Serial.print("Direccion IP: ");
     Serial.println(Ethernet.localIP());
-    httpRequest("ping"); 
+    httpRequest("ping");
   }
-  // Actualiza la variable ultimoEstado 
+  // Actualiza la variable ultimoEstado
   ultimoEstado = client.connected();
 }
-// Fin del loop principal 
+// Fin del loop principal
