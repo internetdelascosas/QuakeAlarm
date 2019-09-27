@@ -49,8 +49,8 @@ int xmlTakeParam(String inStr,String needParam)
 void httpRequest(char action[200]) {
 
   if ((WiFiMulti.run() == WL_CONNECTED)) {
-    Serial.println("QuakeAlarm: Connecting to the server...");
-    Serial.print("WiFiMulti.run() = ");
+    Serial.println("[ESP8266] Connecting to the server...");
+    Serial.print("[ESP8266] WiFiMulti.run() = ");
     Serial.println(WiFiMulti.run());
 
     char url[200];
@@ -82,17 +82,19 @@ void httpRequest(char action[200]) {
         // HTTP header has been send and Server response header has been handled
         Serial.printf("[HTTP] GET... code: %d\n", httpCode);
 
-        // Process the payload sent by the server
+        // Process the payload sent by the server and print the status 
         if (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {
           String payload = http.getString();
-          Serial.print("Payload     : ");
+          Serial.print("[QuakeAlarm] Payload     : ");
           Serial.println(payload);
           sensibility = xmlTakeParam(payload,"sensibilidad");
-          Serial.print("Sensibility : ");
+          Serial.print("[QuakeAlarm] Sensibility : ");
           Serial.println(sensibility);
           ping = xmlTakeParam(payload,"ping");
-          Serial.print("Ping        : ");
+          Serial.print("[QuakeAlarm] Ping        : ");
           Serial.println(ping);
+          Serial.print("[QuakeAlarm] qaValue     : ");
+          Serial.println(qaValue);
         }
       } else {
         Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
@@ -105,7 +107,7 @@ void httpRequest(char action[200]) {
   }
   else {
     // Wifi connection problems
-    Serial.print("WiFiMulti.run() = ");
+    Serial.print("[ESP8266] WiFiMulti.run() = ");
     Serial.println(WiFiMulti.run());
     // Wait one second
     delay(1000);
